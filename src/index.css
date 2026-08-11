@@ -1,0 +1,373 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap');
+
+:root {
+  --blue-deep: #1e40af;
+  --blue-mid: #3b82f6;
+  --blue-soft: #60a5fa;
+  --blue-blush: #e0f2fe;
+  --blue-whisper: #f0f9ff;
+  
+  --matcha-deep: #4a6b34;
+  --matcha-mid: #7a9a60;
+  --matcha-soft: #a3c985;
+  --matcha-blush: #ecf8e5;
+  --matcha-whisper: #f4fbf0;
+
+  --pink-deep: var(--blue-mid);
+  --pink-mid: var(--matcha-mid);
+  --pink-soft: var(--blue-soft);
+  --pink-blush: var(--blue-blush);
+  --pink-whisper: var(--matcha-whisper);
+  
+  --cream: #f8fafc;
+  --rose-gold: #475569;
+  --berry: #0f172a;
+  --berry-light: #334155;
+  --lavender: #dbeafe;
+  --gold-accent: #658c4c;
+  --gold-light: #dcfce7;
+  --gold-shadow: rgba(101, 140, 76, 0.25);
+
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-border: rgba(96, 165, 250, 0.3);
+  --glass-shadow: 0 12px 40px rgba(15, 23, 42, 0.12);
+
+  --font-display: 'Dancing Script', cursive;
+  --font-cute: 'Fredoka', sans-serif;
+  --font-body: 'Quicksand', sans-serif;
+
+  --ease-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: #0f172a;
+  color: var(--berry);
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Mobile-first App Shell ─── */
+.app-shell {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100dvh;
+  position: relative;
+  overflow: hidden;
+  background: var(--cream);
+  isolation: isolate;
+}
+
+@media (min-width: 431px) {
+  body {
+    padding: 16px 0;
+  }
+  .app-shell {
+    min-height: 94dvh;
+    max-height: 94dvh;
+    border-radius: 40px;
+    box-shadow:
+      0 0 0 1px rgba(96,165,250,0.3),
+      0 25px 60px rgba(0, 0, 0, 0.5),
+      0 0 120px rgba(59, 130, 246, 0.2);
+    overflow-y: auto;
+  }
+}
+
+/* ─── Background Layer ─── */
+.bg-layer {
+  position: sticky;
+  top: 0; left: 0;
+  width: 100%; height: 100dvh;
+  pointer-events: none;
+  z-index: 0;
+  margin-bottom: -100dvh;
+}
+
+.bg-layer__image {
+  position: absolute;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+}
+
+.bg-gradient {
+  position: absolute;
+  width: 100%; height: 100%;
+  background:
+    linear-gradient(180deg,
+      rgba(240, 249, 255, 0.75) 0%,
+      rgba(224, 242, 254, 0.65) 40%,
+      rgba(236, 248, 229, 0.7) 100%
+    );
+}
+
+/* ─── Stage container ─── */
+.stage {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+}
+
+.stage--scroll {
+  justify-content: flex-start;
+  padding-top: 40px;
+  padding-bottom: 120px;
+}
+
+/* ─── Glassmorphism Card ─── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 28px;
+  box-shadow: var(--glass-shadow);
+}
+
+/* ─── Buttons ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 28px;
+  background: linear-gradient(135deg, var(--blue-mid) 0%, var(--matcha-mid) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 60px;
+  font-family: var(--font-cute);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(59, 130, 246, 0.35);
+  transition: transform 0.25s var(--ease-bounce), box-shadow 0.25s var(--ease-smooth);
+  -webkit-user-select: none;
+  user-select: none;
+}
+.btn-primary:active {
+  transform: scale(0.96);
+  box-shadow: 0 3px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 18px;
+  background: rgba(255,255,255,0.8);
+  color: var(--blue-mid);
+  border: 1.5px solid var(--blue-soft);
+  border-radius: 60px;
+  font-family: var(--font-cute);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-smooth);
+  -webkit-user-select: none;
+  user-select: none;
+}
+.btn-ghost:active {
+  background: var(--pink-whisper);
+  border-color: var(--pink-mid);
+}
+
+/* ─── Floating Hearts Particles ─── */
+.floating-hearts {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.floating-heart {
+  position: absolute;
+  font-size: 14px;
+  opacity: 0;
+  animation: floatUp var(--dur, 8s) var(--delay, 0s) infinite ease-in;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100vh) rotate(0deg) scale(0.6);
+  }
+  10% { opacity: 0.5; }
+  90% { opacity: 0.3; }
+  100% {
+    opacity: 0;
+    transform: translateY(-20vh) rotate(360deg) scale(1);
+  }
+}
+
+/* ─── Keyframe Utilities ─── */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@keyframes vinylSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.anim-breathe { animation: breathe 2s ease-in-out infinite; }
+.anim-spin { animation: vinylSpin 4s linear infinite; }
+.anim-spin-paused { animation-play-state: paused; }
+.anim-float { animation: gentleFloat 3.5s ease-in-out infinite; }
+.anim-shimmer {
+  background: linear-gradient(90deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: shimmer 2.5s infinite;
+}
+
+/* ─── Section label chip ─── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+/* ─── Custom scrollbar (desktop) ─── */
+.app-shell::-webkit-scrollbar { width: 5px; }
+.app-shell::-webkit-scrollbar-thumb {
+  background: var(--pink-soft);
+  border-radius: 10px;
+}
+
+/* ─── Sparkling 20 & Birthday Typography Styles ─── */
+.sparkling-20-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 20px;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 215, 0, 0.75);
+  box-shadow: 0 8px 32px rgba(212, 163, 89, 0.45), 0 0 20px rgba(255, 215, 0, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.35);
+}
+
+.sparkling-20-text {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(
+    110deg,
+    #ffffff 0%,
+    #ffe27d 20%,
+    #ffffff 40%,
+    #ff8da9 60%,
+    #ffd700 80%,
+    #ffffff 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: sparkle-shimmer 2.2s linear infinite;
+  filter: drop-shadow(0 2px 12px rgba(255, 215, 0, 0.95)) drop-shadow(0 0 25px rgba(212, 69, 108, 0.75));
+  letter-spacing: 2px;
+}
+
+.sparkling-birthday-text {
+  font-family: var(--font-cute);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #fff 0%, #ffe082 50%, #ffa4bf 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: sparkle-shimmer 3s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(255,215,0,0.5));
+}
+
+.birthday-greeting-box {
+  background: rgba(45, 16, 30, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 20px;
+  padding: 12px 18px;
+  margin: 10px 0 16px 0;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4), inset 0 0 15px rgba(255, 182, 193, 0.15);
+}
+
+.sparkle-icon-left, .sparkle-icon-right {
+  font-size: 1.3rem;
+  animation: sparkle-bounce 1.6s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 8px #ffd700);
+}
+
+.sparkle-icon-right {
+  animation-delay: 0.8s;
+}
+
+@keyframes sparkle-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes sparkle-bounce {
+  0% {
+    transform: scale(0.85) rotate(-10deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.25) rotate(15deg);
+    opacity: 1;
+  }
+}
+
+
